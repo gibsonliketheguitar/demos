@@ -1,3 +1,5 @@
+
+import React, { createContext, useContext } from "react";
 import { BehaviorSubject, combineLatestWith, map } from "rxjs";
 import { readRemoteFile } from "react-papaparse";
 import { I_Stock } from "../ts/StockInterface";
@@ -31,6 +33,11 @@ export const stock$ = formatStock$.pipe(
     )
 )
 
+export const portfolio$ = stock$.pipe(
+    map((stock) => stock.filter((s: any) => s.selected)
+    )
+)
+
 async function fetchStock() {
     const config: any = {
         complete: (results: any) => rawStock$.next(results.data),
@@ -41,3 +48,24 @@ async function fetchStock() {
 }
 
 fetchStock()
+
+const StockContext = createContext({
+    portfolio$,
+    selected$,
+    stock$
+});
+
+export const useStock = () => useContext(StockContext)
+
+export const StockProvider: React.FunctionComponent = ({ children }) => {
+    return (
+        <StockContext.Provider
+            value={{
+                portfolio$,
+                selected$,
+                stock$
+            }}>
+            {children}
+        </StockContext.Provider>
+    )
+}
