@@ -12,6 +12,10 @@ const links = [
     h1: "Alarm Clock with 2 implementation",
     p: "Custom Hook vs Subject",
   },
+  {
+    link: '/multiapicall',
+    h1: "Calling multi APi"
+  }
 ];
 
 const Home: NextPage = () => {
