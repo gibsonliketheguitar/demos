@@ -1,0 +1,25 @@
+
+
+test("handles server loading data", async () => {
+  server.use(
+    rest.get(endpoint, (req, res, ctx) => {
+      return res(ctx.delay(500).status(204));
+    })
+  );
+
+  const { result } = renderHook(() => useSwrFetch(endpoint));
+  await result();
+  expect(result.current.data).toBe(undefined);
+});
+
+test("handles server error", async () => {
+  server.use(
+    rest.get(endpoint, (req, res, ctx) => {
+      return res(ctx.status(500));
+    })
+  );
+
+  const { result } = renderHook(() => useSwrFetch(endpoint));
+  await result();
+  expect(result.current.error).toBe(true);
+});
