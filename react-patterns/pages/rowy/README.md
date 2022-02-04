@@ -1,0 +1,2 @@
+- GOAL
+  -- How do we get accesss to the firesbase data stuff

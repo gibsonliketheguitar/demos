@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+} */
+
+@layer components {
+  .btn-base {
+    @apply px-6 py-2.5 flex flex-row space-x-2.5 h-12 w-auto justify-center items-center rounded shadow-md text-center text-base;
+  }
+  .btn-default {
+    @apply bg-black text-white;
+  }
+
+  .btn-outlined {
+    @apply outline outline-1 outline-black shadow-none rounded-sm text-black;
+  }
+
+  .btn-text {
+    @apply shadow-none text-black;
+  }
+}

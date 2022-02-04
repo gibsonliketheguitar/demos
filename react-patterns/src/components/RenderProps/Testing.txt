@@ -1,0 +1,37 @@
+// Polyfill "window.fetch" used in the React component.
+
+import React from "react";
+import { rest } from "msw";
+import { setupServer } from "msw/node";
+import { render } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import DataProvider4 from "../../components/RenderProps/DataProvider4";
+//https://kentcdodds.com/blog/write-tests
+
+const endpoint = "/swr-test";
+
+const server = setupServer(
+  rest.get(endpoint, (req, res, ctx) => {
+    return res(
+      ctx.json({
+        name: "Gibson Han",
+        description: "Coding, Animation, Movie, Cineatography",
+        subscribers_count: "0",
+        stargazers_count: "0",
+        fork_counts: "0",
+      })
+    );
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+test("Test DataProvider 4, successfull data", async () => {
+  const component = render(
+    <DataProvider4 url="/swr-test" render={(data) => <Main {...data} />} />
+  );
+  //component.debug();
+  expect(component.container).toHaveTextContent("Gibson Han");
+});
