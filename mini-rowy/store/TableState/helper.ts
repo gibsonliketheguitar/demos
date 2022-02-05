@@ -6,7 +6,7 @@ export function readTableColumnsAtom() {
   return { tableColumns };
 }
 
-export function updateTableColumnAtom() {
+export function updateTableColumnsAtom() {
   const updateTableColumns = useUpdateAtom(tableColumnAtom);
   return { updateTableColumns };
 }

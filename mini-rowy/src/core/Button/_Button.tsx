@@ -17,9 +17,8 @@ export default function Button({
 }: IButton) {
   const hasIcon = Boolean(icon);
   const handleOnClick = (e: any) => {
-    e.preventDefault();
     if (disabled) return;
-    console.log("firing");
+    e.preventDefault();
     onClick?.();
   };
 
