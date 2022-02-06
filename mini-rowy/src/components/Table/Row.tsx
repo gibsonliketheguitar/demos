@@ -6,7 +6,7 @@ function Row({ row }: any) {
   return (
     <tr {...row.getRowProps()}>
       {row.cells.map((cell: any, index: any) => {
-        return <Cell key={index} cell={cell} />;
+        return <Cell key={cell.value + index} cell={cell} />;
       })}
     </tr>
   );

@@ -13,13 +13,15 @@ import {
 import RenderCheck from "src/components/RenderCheck";
 import { setUncaughtExceptionCaptureCallback } from "process";
 import NoMemo from "src/components/RenderCheck/NoMemo";
+import { useUpdateAtom } from "jotai/utils";
+import { tableColumnAtom, tableDataAtom } from "./_app";
 
 const Home: NextPage = () => {
   const [text, setText] = useState("");
-  const { tableData } = readTableDataAtom();
-  const { tableColumns } = readTableColumnsAtom();
-  const { updateTableColumns } = updateTableColumnsAtom();
-  const { updateTableData } = updateTableDataAtom();
+  const [text2, setText2] = useState("");
+
+  const updateTableData = useUpdateAtom(tableDataAtom);
+  const updateTableColumns = useUpdateAtom(tableColumnAtom);
 
   const handleAddColumn = () => {
     updateTableColumns((prev) => {
@@ -38,13 +40,27 @@ const Home: NextPage = () => {
     });
   };
 
+  const passAnon = React.useCallback(() => setText(""), [setText]);
+  const helloWolrd = () => console.log("hello world");
+  const dataIssue = { haveData: false }; //on rerender, a new reference is created
+
   return (
     <Layout>
-      <input value={text} onChange={(e: any) => setText(e?.target?.value)} />
-      <Table columns={tableColumns} data={tableData} />
+      <Table />
       <Button title="Add Column" onClick={handleAddColumn} />
       <Button title="Add Row" onClick={handleAddRow} />
-      <RenderCheck />
+      {/** This is testing purpose */}
+      <input
+        placeholder={text}
+        value={text}
+        onChange={(e: any) => setText(e?.target?.value)}
+      />
+      <input
+        placeholder={text2}
+        value={text2}
+        onChange={(e: any) => setText2(e?.target?.value)}
+      />
+      <RenderCheck passAnon={helloWolrd} data={dataIssue} />
       <NoMemo />
     </Layout>
   );
