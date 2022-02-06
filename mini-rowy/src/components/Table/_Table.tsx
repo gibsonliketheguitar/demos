@@ -22,7 +22,8 @@ export default function Table({ columns, data }: ITable) {
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column, index) => {
-              return <ColumnHeader key={index} column={column} />;
+              const columnKey = `${column.Header}${index}`;
+              return <ColumnHeader key={columnKey} column={column} />;
             })}
           </tr>
         ))}

@@ -11,4 +11,7 @@ function Cell({ cell }: any) {
   );
 }
 
-export default React.memo(Cell);
+export default React.memo(
+  Cell,
+  (prevProps, nextProps) => prevProps.cell.value !== nextProps.cell.value
+);

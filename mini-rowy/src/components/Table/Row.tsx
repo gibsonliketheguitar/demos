@@ -1,5 +1,6 @@
 import React from "react";
 import Cell from "./Cell";
+import equal from "fast-deep-equal";
 
 function Row({ row }: any) {
   return (
@@ -11,4 +12,7 @@ function Row({ row }: any) {
   );
 }
 
-export default React.memo(Row);
+export default React.memo(Row, (prevProps, nextProps) => {
+  //console.log(equal(prevProps.row.original, nextProps.row.original))
+  return equal(prevProps.row.original, nextProps.row.original) ? false : true;
+});
