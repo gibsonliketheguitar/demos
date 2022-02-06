@@ -1,3 +1,4 @@
+import React from "react";
 import { IButton } from "./IButton";
 
 enum Btn {
@@ -6,7 +7,7 @@ enum Btn {
   text = "btn-text",
 }
 
-export default function Button({
+function Button({
   disabled = false,
   variant = "default",
   title,
@@ -16,11 +17,15 @@ export default function Button({
   onClick,
 }: IButton) {
   const hasIcon = Boolean(icon);
-  const handleOnClick = (e: any) => {
-    if (disabled) return;
-    e.preventDefault();
-    onClick?.();
-  };
+
+  const handleOnClick = React.useCallback(
+    (e: any) => {
+      if (disabled) return null;
+      e.preventDefault();
+      onClick?.();
+    },
+    [onClick]
+  );
 
   return (
     <div
@@ -32,3 +37,5 @@ export default function Button({
     </div>
   );
 }
+
+export default React.memo(Button);

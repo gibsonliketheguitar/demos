@@ -1,4 +1,3 @@
-import React from "react";
 import { useTable } from "react-table";
 import ColumnHeader from "./ColumnHeader";
 import Row from "./Row";

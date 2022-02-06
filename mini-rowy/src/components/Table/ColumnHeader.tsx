@@ -1,4 +1,6 @@
-export default function ColumnHeader({ column }: any) {
+import React from "react";
+
+function ColumnHeader({ column }: any) {
   return (
     <th
       className="font-bold border-b-3 border-red-300 bg-blue-500"
@@ -8,3 +10,5 @@ export default function ColumnHeader({ column }: any) {
     </th>
   );
 }
+
+export default React.memo(ColumnHeader);

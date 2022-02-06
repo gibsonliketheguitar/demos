@@ -1,6 +1,7 @@
+import React from "react";
 import Cell from "./Cell";
 
-export default function Row({ row }: any) {
+function Row({ row }: any) {
   return (
     <tr {...row.getRowProps()}>
       {row.cells.map((cell: any, index: any) => {
@@ -9,3 +10,5 @@ export default function Row({ row }: any) {
     </tr>
   );
 }
+
+export default React.memo(Row);
