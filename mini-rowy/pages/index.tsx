@@ -1,23 +1,19 @@
 import type { NextPage } from "next";
+import React, { useCallback, useState } from "react";
 
 import Button from "@/core/Button/_Button";
 import { default as Layout } from "@/layout/Home";
 import Table from "src/components/Table/_Table";
-import React from "react";
 import {
-  readTableColumnsAtom,
-  readTableDataAtom,
   updateTableColumnsAtom,
   updateTableDataAtom,
 } from "@/store/TableState/helper";
 
 const Home: NextPage = () => {
-  const { tableColumns } = readTableColumnsAtom();
-  const { tableData } = readTableDataAtom();
   const { updateTableColumns } = updateTableColumnsAtom();
   const { updateTableData } = updateTableDataAtom();
 
-  const handleAddColumn = () => {
+  function AddColumn() {
     updateTableColumns((prev) => {
       const len = prev.length + 1;
       const newCol = {
@@ -26,17 +22,20 @@ const Home: NextPage = () => {
       };
       return [...prev, newCol];
     });
-  };
+  }
 
-  const handleAddRow = () => {
+  const AddRow = () => {
     updateTableData((prev: any) => {
       return [{}, ...prev];
     });
   };
 
+  const handleAddColumn = useCallback(() => AddColumn(), [updateTableColumns]);
+  const handleAddRow = useCallback(() => AddRow(), [updateTableColumns]);
+
   return (
     <Layout>
-      <Table columns={tableColumns} data={tableData} />
+      <Table />
       <Button title="Add Column" onClick={handleAddColumn} />
       <Button title="Add Row" onClick={handleAddRow} />
     </Layout>

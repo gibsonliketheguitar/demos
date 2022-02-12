@@ -1,15 +1,18 @@
+import {
+  readTableColumnsAtom,
+  readTableDataAtom,
+} from "@/store/TableState/helper";
 import React from "react";
 import { useTable } from "react-table";
+
 import ColumnHeader from "./ColumnHeader";
 import Row from "./Row";
 
-interface ITable {
-  columns?: any;
-  data?: any;
-}
-export default function Table({ columns, data }: ITable) {
+export default function Table() {
+  const { tableColumns } = readTableColumnsAtom();
+  const { tableData } = readTableDataAtom();
   // @ts-ignore: Unreachable code error
-  const tableInstance = useTable({ columns, data });
+  const tableInstance = useTable({ columns: tableColumns, data: tableData });
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance;
