@@ -26,7 +26,7 @@ const Home: NextPage = () => {
 
   const AddRow = () => {
     updateTableData((prev: any) => {
-      return [{}, ...prev];
+      return [...prev, {}];
     });
   };
 

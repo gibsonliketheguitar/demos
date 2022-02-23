@@ -1,6 +1,6 @@
 import Cell from "./Cell";
 
-export default function Row({ row }: any) {
+export default function BodyRow({ row }: any) {
   return (
     <tr {...row.getRowProps()}>
       {row.cells.map((cell: any, index: any) => {
