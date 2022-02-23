@@ -1,2 +1,3 @@
 - GOAL
-  -- How do we get accesss to the firesbase data stuff
+  -- How do we link frontend to rowy data
+  -- Is there an API generator?
