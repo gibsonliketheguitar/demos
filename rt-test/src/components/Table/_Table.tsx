@@ -5,8 +5,8 @@ import {
 import React from "react";
 import { useTable } from "react-table";
 
-import ColumnHeader from "./ColumnHeader";
-import Row from "./Row";
+import Header from "./Header";
+import { default as Body } from "./Body";
 
 export default function Table() {
   const { tableColumns } = readTableColumnsAtom();
@@ -22,21 +22,12 @@ export default function Table() {
       className="border-solid border-2 border-blue-500"
       {...getTableProps()}
     >
-      <thead>
-        {headerGroups.map((headerGroup) => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column, index) => {
-              return <ColumnHeader key={index} column={column} />;
-            })}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map((row, index) => {
-          prepareRow(row);
-          return <Row key={index} row={row} />;
-        })}
-      </tbody>
+      <Header headerGroups={headerGroups} />
+      <Body
+        getTableBodyProps={getTableBodyProps}
+        prepareRow={prepareRow}
+        rows={rows}
+      />
     </table>
   );
 }

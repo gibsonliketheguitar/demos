@@ -18,6 +18,6 @@ export function logCompareMemoProps(prev: any, next: any) {
  * Issue with this is that function references are not compared correctly
  */
 export function isObjectEqual(prevProps: {}, nextProps: {}): boolean {
-  const result = equal(prevProps, nextProps) ? false : true;
+  const result = equal(prevProps, nextProps) ? true : false;
   return result;
 }
